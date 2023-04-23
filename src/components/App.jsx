@@ -1,22 +1,16 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { store } from '../modules/app';
 import { Provider } from 'react-redux';
-
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <h1 className="text-4xl text-blue-700">Merhaba!</h1>
-    }
-]);
+import { SearchPage } from './SearchPage';
 
 const App = () => {
     return (
-        <RouterProvider router={router}>
-            <Provider store={store}>
-                <h1 className="text-4xl text-blue-700">Merhaba!</h1>
-            </Provider>
-        </RouterProvider>
+        <div className='flex flex-col h-screen w-screen bg-gradient-to-b from-fruit-salad-600 to-fruit-salad-700'>
+                <Provider store={store}>
+                    <SearchPage/>
+                </Provider>
+        </div>
+        
     );
 };
 

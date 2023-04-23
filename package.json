@@ -4,9 +4,10 @@
   "description": "An UI project allowing to find users and user's projects",
   "main": "index.js",
   "scripts": {
+    "build-prod": "webpack --mode production",
     "build": "webpack --mode development",
     "watch": "webpack --mode development --watch",
-    "serve": "webpack serve --mode development --open-app-name 'google chrome' --live-reload --no-hot"
+    "serve": "webpack serve --mode development --open --live-reload --no-hot"
   },
   "repository": {
     "type": "git",
@@ -22,9 +23,7 @@
     "@reduxjs/toolkit": "1.9.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-redux": "8.0.5",
-    "react-router": "6.10.0",
-    "react-router-dom": "6.10.0"
+    "react-redux": "8.0.5"
   },
   "devDependencies": {
     "@babel/core": "7.21.4",

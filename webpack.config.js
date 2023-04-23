@@ -22,7 +22,7 @@ module.exports = function(env, argv) {
         port: 3030,
         watchFiles: 'src/*',
         static: {
-            directory: path.resolve(__dirname, 'dist'),
+            directory: path.resolve(__dirname, 'dist')
         },
     },
     devtool: 'eval-source-map',
