@@ -37,7 +37,10 @@ module.exports = function(env, argv) {
         },
         {
           test: /\.css$/i,
-          include: path.resolve(__dirname, 'src'),
+          include: [
+            path.resolve(__dirname, 'src'),
+            /node_modules/
+          ],
           use: ["style-loader", "css-loader", "postcss-loader"],
         },
         {
@@ -48,7 +51,7 @@ module.exports = function(env, argv) {
     },
     resolve: {
       enforceExtension: false,
-      extensions: ['.js', '.jsx', '.scss', '.html', '.json'],
+      extensions: ['.js', '.jsx', '.css', '.html', '.json'],
     },
     optimization: {
       minimize: true
