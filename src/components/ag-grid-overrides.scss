@@ -1,0 +1,48 @@
+.ag-theme-material {
+    font-family: inherit;
+
+    @apply font-normal text-base;
+    --ag-row-border-color: transparent;
+    --ag-cell-horizontal-padding: 0;
+    --ag-borders: none;
+    --ag-background-color: transparent;
+    --ag-header-background-color: transparent;
+    --ag-row-hover-color: transparent;
+    --ag-border-color: transparent;
+    --ag-material-primary-color: yellow;
+    
+    .ag-body {
+        @apply bg-fruit-salad-800;
+    }
+
+    .ag-root-wrapper {
+        @apply rounded-lg shadow-lg;
+    }
+
+    .ag-cell {
+        @apply text-center text-white;
+    }
+
+    .ag-row {
+        @apply border-b-0;
+
+        &:hover {
+            @apply cursor-pointer bg-fruit-salad-400;
+        }
+    }
+
+    .ag-row-hover {
+
+        .ag-cell {
+            @apply text-black bg-fruit-salad-400 transition-colors;
+        }
+    }
+
+    .ag-cell-label-container {
+        @apply justify-center text-lg bg-fruit-salad-500 m-0 p-0;
+
+        .ag-header-cell-label {
+            @apply flex-none text-white font-light;
+        }
+    }
+}

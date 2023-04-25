@@ -36,12 +36,12 @@ module.exports = function(env, argv) {
           },
         },
         {
-          test: /\.css$/i,
+          test: /\.(scss|css)$/i,
           include: [
             path.resolve(__dirname, 'src'),
             /node_modules/
           ],
-          use: ["style-loader", "css-loader", "postcss-loader"],
+          use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"],
         },
         {
           test: /\.(png|woff|woff2|eot|ttf|svg)$/,
