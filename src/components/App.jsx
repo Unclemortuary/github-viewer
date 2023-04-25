@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
-import { store } from '../modules/app';
+import { store, URLS } from '../modules/app';
 import { Provider } from 'react-redux';
 import { SearchPage } from './SearchPage';
 import { ProfilePage } from './ProfilePage';
+import { RepositoryPage } from './RepositoryPage';
 
 const router = createHashRouter([
     {
@@ -11,14 +12,18 @@ const router = createHashRouter([
       element: <SearchPage />,
     },
     {
-        path: "/profile",
+        path: `/${URLS.profile}`,
         element: <ProfilePage />,
     },
+    {
+        path: `/${URLS.repository}`,
+        element: <RepositoryPage />,
+    }
 ]);
 
 const App = () => {
     return (
-        <div className='flex flex-col h-screen w-screen bg-gradient-to-b from-fruit-salad-600 to-fruit-salad-700'>
+        <div className='flex min-h-0 flex-col h-screen w-screen bg-gradient-to-b from-fruit-salad-700 to-fruit-salad-950'>
             <Provider store={store}>
                 <RouterProvider router={router}/>
             </Provider>

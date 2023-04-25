@@ -8,3 +8,8 @@ export const store = configureStore({
     // todo: dev mode only
     devTools: true
 });
+
+export const URLS = {
+    profile: 'profile',
+    repository: 'repository'
+};
