@@ -51,7 +51,7 @@ module.exports = function(env, argv) {
     },
     resolve: {
       enforceExtension: false,
-      extensions: ['.js', '.jsx', '.css', '.html', '.json'],
+      extensions: ['.js', '.jsx', '.css', '.scss', '.html', '.json'],
     },
     optimization: {
       minimize: true

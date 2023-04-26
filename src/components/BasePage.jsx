@@ -2,7 +2,7 @@ import React from 'react';
 
 const BasePage = ({ header, grid }) => {
     return (
-        <div className='min-h-0 flex flex-col gap-3'>
+        <div className='min-h-0 h-full flex flex-col gap-3'>
             <HeaderWrapper>
                 {header}
             </HeaderWrapper>
@@ -10,7 +10,6 @@ const BasePage = ({ header, grid }) => {
             <Divider/>
 
             <GridWrapper>
-                {/* <p className='text-6xl font-extralight text-white m-auto h-full'>Нет данных</p> */}
                 {grid}
             </GridWrapper>
         </div>
@@ -25,6 +24,6 @@ const HeaderWrapper = ({ children }) => (
 
 const Divider = () => <div className='mb-3 w-full h-0 border-t border-fruit-salad-950'></div>;
 
-const GridWrapper = ({ children }) => <div className='overflow-hidden p-4 pt-0 w-full h-full ag-theme-material rounded-lg'>{children}</div>;
+const GridWrapper = ({ children }) => <div className='flex h-3/4 flex-col gap-3'>{children}</div>;
 
 export default BasePage;

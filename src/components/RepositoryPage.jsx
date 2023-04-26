@@ -1,35 +1,28 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AgGridReact } from 'ag-grid-react';
+import Grid from './grid/Grid';
 import BasePage from './BasePage';
-import Button from './Button';
-
-import 'ag-grid-community/styles/ag-grid';
-import 'ag-grid-community/styles/ag-theme-material';
-import './ag-grid-overrides.scss';
+import Button from './button/Button';
 
 export const RepositoryPage = () => {
-    const gridRef = useRef();
     const navigate = useNavigate();
 
     const [rowData, setRowData] = useState([
         { make: "Toyota", model: "Celica", price: 35000 },
         { make: "Ford", model: "Mondeo", price: 32000 },
-        { make: "Porsche", model: "Boxster", price: 72000 }
+        { make: "Porsche", model: "Boxster", price: 72000 },
+        { make: "Toyota", model: "Celica", price: 350 },
+        { make: "Ford", model: "Mondeo", price: 320 },
+        { make: "Porsche", model: "Boxste 123 r", price: 2000 },
+        { make: "Toyota123", model: "Celica", price: 31000 },
+        { make: "Ford", model: "Mondeo", price: 32200 },
+        { make: "Porsche2", model: "Boxster", price: 720 }
     ]);
     const [columnDefs, setColumnDefs] = useState([
         { field: 'make', headerName: 'Автор' },
         { field: 'model', headerName: 'Хэш' },
         { field: 'price', headerName: 'Дата' }
     ]);
-
-    useEffect(() => {
-        const fit = () => setTimeout(() => gridRef.current.api.sizeColumnsToFit());
-        window.addEventListener('resize', fit);
-        return () => {
-            window.removeEventListener('resize', fit);
-        }
-    }, []);
 
     const header = (
         <>
@@ -48,20 +41,14 @@ export const RepositoryPage = () => {
 
     const grid = (
         <>
-            <AgGridReact
-                ref={gridRef}
+            <Grid
                 columnDefs={columnDefs}
                 rowData={rowData}
-                sizeCol
-                domLayout='autoHeight'
-                onGridReady={() => {
-                    gridRef.current.api.sizeColumnsToFit();
-                }}
             />
             <Button
                 onClick={() => navigate(-1)}
-                className='h-10'
-                text={<><span className='text-base'>&#x2190;</span> назад</>}
+                className='w-24 h-16 mx-4 flex items-center gap-1 mb-2'
+                text={<><span className='text-base block h-5'>&#x2190;</span> назад</>}
             />
         </>
     );

@@ -1,15 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AgGridReact } from 'ag-grid-react';
 import BasePage from './BasePage';
+import Grid from './grid/Grid';
 import { URLS } from '../modules/app';
 
-import 'ag-grid-community/styles/ag-grid';
-import 'ag-grid-community/styles/ag-theme-material';
-import './ag-grid-overrides.scss';
-
 export const ProfilePage = () => {
-    const gridRef = useRef();
     const navigate = useNavigate();
 
     const [rowData, setRowData] = useState([
@@ -23,14 +18,6 @@ export const ProfilePage = () => {
         { field: 'price', headerName: 'Описание' },
         { field: 'stars', headerName: 'Количество звёзд' }
     ]);
-
-    useEffect(() => {
-        const fit = () => gridRef.current.api.sizeColumnsToFit();
-        window.addEventListener('resize', fit);
-        return () => {
-            window.removeEventListener('resize', fit);
-        }
-    }, []);
 
     const header = (
         <>
@@ -50,15 +37,9 @@ export const ProfilePage = () => {
     );
 
     const grid = (
-        <AgGridReact
-            ref={gridRef}
+        <Grid
             columnDefs={columnDefs}
             rowData={rowData}
-            sizeCol
-            domLayout='autoHeight'
-            onGridReady={() => {
-                gridRef.current.api.sizeColumnsToFit();
-            }}
             onCellClicked={() => navigate(`/${URLS.repository}`)}
         />
     );

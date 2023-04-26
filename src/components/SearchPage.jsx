@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from './Button';
+import Button from './button/Button';
+import { URLS } from '../modules/app';
 
 export const SearchPage = () => {
     const navigate = useNavigate();
+    // todo trim
     const [loginInput, setLoginInput] = useState("");
 
     return (
@@ -12,7 +14,8 @@ export const SearchPage = () => {
             <Button
                 className='ml-4'
                 disabled={loginInput === ""}
-                onClick={() => navigate('profile')} text='Перейти к профайлу'
+                onClick={() => navigate(URLS.profile)}
+                text='Перейти к профайлу'
             />
         </div>
     );
