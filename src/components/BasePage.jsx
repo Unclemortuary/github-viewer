@@ -17,7 +17,7 @@ const BasePage = ({ header, grid }) => {
 };
 
 const HeaderWrapper = ({ children }) => (
-    <div className='p-4 pb-0 grid gap-8 grid-cols-[1fr_4fr_1fr] text-white'>
+    <div className='p-4 pb-0 grid gap-4 grid-cols-[minmax(250px,_1fr)_minmax(300px,_3fr)_1fr] text-white'>
         {children}
     </div>
 );

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BasePage from './BasePage';
+import LoginSection from './LoginSection';
+import AvatarSection from './ImageSection';
 import Grid from './grid/Grid';
 import { URLS } from '../modules/app';
 
@@ -21,18 +23,13 @@ export const ProfilePage = () => {
 
     const header = (
         <>
-            <section className='flex flex-col items-center justify-start mr-auto'>
-                <span className='font-medium text-3xl'>Unclemortuary</span>
-                <span className='font-light text-lg'>Артём Гусев</span>
-            </section>
+            <LoginSection containerClassName='mr-auto'/>
 
             <section className='flex items-center mx-auto text-center'>
                 <p className='text-4xl font-extralight'>Список публичных репозиториев</p>
             </section>
 
-            <section className='flex items-center justify-center'>
-                <img className='ml-auto w-16 h-auto rounded-full' src='https://avatars.githubusercontent.com/u/15903982?v=4'/>
-            </section>
+            <AvatarSection containerClassName='ml-auto'/>
         </>
     );
 

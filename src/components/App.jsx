@@ -23,7 +23,7 @@ const router = createHashRouter([
 
 const App = () => {
     return (
-        <div className='flex min-h-0 flex-col h-screen w-screen bg-gradient-to-b from-fruit-salad-700 to-fruit-salad-950'>
+        <div className='flex min-h-0 min-w-min flex-col h-screen w-screen bg-gradient-to-b from-fruit-salad-700 to-fruit-salad-950'>
             <Provider store={store}>
                 <RouterProvider router={router}/>
             </Provider>
