@@ -21,9 +21,7 @@ const Grid = ({ rowData, colDefs, loading, ...props }) => {
             <AgGridReact
                 ref={gridRef}
                 sizeCol
-                onGridReady={() => {
-                    gridRef.current.api.sizeColumnsToFit();
-                }}
+                onGridReady={() => gridRef.current.api.sizeColumnsToFit()}
                 rowData={loading ? null : rowData}
                 columnDefs={colDefs}
                 {...props}

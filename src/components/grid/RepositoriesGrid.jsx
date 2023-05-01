@@ -13,7 +13,7 @@ const RepositoriesGrid = ({ repositoryUrl }) => {
     const colDefs = [
         { field: 'name', headerName: 'Наименование' },
         { field: 'language', headerName: 'Язык программирования' },
-        { field: 'description', headerName: 'Описание', tooltipValueGetter: e => e.data.description },
+        { field: 'description', headerName: 'Описание', tooltipValueGetter: e => e.data?.description },
         { field: 'stargazers_count', headerName: 'Количество звёзд' }
     ];
 

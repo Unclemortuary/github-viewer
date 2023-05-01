@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { request } from '../../modules/api';
+import { getIterator } from '../../modules/api';
 
 export const useGrid = ({
     url,
@@ -12,6 +12,7 @@ export const useGrid = ({
     const rowData = useSelector(getDataSelector);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+    const PAGE_SIZE = 50;
 
     useEffect(() => {
         if (!shouldResetOnUnmount && rowData?.length) {
@@ -19,16 +20,22 @@ export const useGrid = ({
             return;
         }
         const abortController = new AbortController();
-        request({ url, signal: abortController.signal })
-            .then(response => {
-                if (response.status === 200) dispatch(setDataAction(response.data));
-            })
-            .catch(e => {
+
+        async function iterateData() {
+            setLoading(true);
+            const iterator = getIterator({ url, signal: abortController.signal, pageSize: PAGE_SIZE });
+            try {
+                for await (const { data } of iterator) {
+                    dispatch(setDataAction(data));
+                }
+            }
+            catch (e) {
                 if (e.name === 'AbortError') return;
                 else alert(e);
-            })
-            .finally(() => setLoading(false));
-        
+            }
+            setLoading(false);
+        }
+        iterateData();
         return () => {
             abortController.abort();
             if (shouldResetOnUnmount) dispatch(resetAction());
