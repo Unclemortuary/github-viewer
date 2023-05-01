@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { store, URLS } from '../modules/app';
 import { Provider } from 'react-redux';

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './button/Button';
+import Loader from './layout/Spinner';
 import { URLS } from '../modules/app';
 import { setLogin, getLogin, setUser, reset } from '../modules/user';
 import { requestUser } from '../modules/api';
@@ -43,7 +44,7 @@ export const SearchPage = () => {
     };
 
     return (
-        <div className='flex self-center my-auto relative'>
+        <div className='flex self-center my-auto'>
             <input
                 className='w-96 h-12 rounded-md px-4 shadow-lg outline-none transition-all focus:outline-yellow-300 outline-2'
                 type='text'
@@ -58,8 +59,7 @@ export const SearchPage = () => {
                 onClick={onSubmit}
                 text='Перейти к профайлу'
             />
-            {/* spinner overlay */}
-            { loading && <p className=' absolute w-8 h-6 left-1/3 -top-32 inset-1 text-white font-light text-lg'>Ищем</p> } 
+            { loading && <Loader className='!absolute bottom-2/3 right-1/2'/> }
         </div>
     );
 };
