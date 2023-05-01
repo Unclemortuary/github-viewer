@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     data: [],
-    selected: null,
-    loading: false
+    selected: null
 };
 
 const repositorySlice = createSlice({
@@ -11,13 +10,11 @@ const repositorySlice = createSlice({
     initialState,
     reducers: {
         setData: (state, action) => ({ ...state, data: action.payload }),
-        setSelectedRepository: (state, action) => ({ ...state, selected: action.payload }),
-        setLoading: (state, action) => ({ ...state, loading: action.payload }),
-        reset: state => initialState
+        setSelectedRepository: (state, action) => ({ ...state, selected: action.payload })
     }
 });
 
-export const { setData, setSelectedRepository, setLoading, reset } = repositorySlice.actions;
+export const { setData, setSelectedRepository } = repositorySlice.actions;
 
 // selectors:
 export const getData = state => state.repository.data;

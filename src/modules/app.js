@@ -13,6 +13,6 @@ export const store = configureStore({
 });
 
 export const URLS = {
-    profile: 'profile',
-    repository: 'repository'
+    repositories: 'repositories',
+    commits: 'commits'
 };

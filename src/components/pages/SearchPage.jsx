@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from './button/Button';
-import Loader from './layout/Spinner';
-import { URLS } from '../modules/app';
-import { setLogin, getLogin, setUser, reset } from '../modules/user';
-import { requestUser } from '../modules/api';
+import Button from '../button/Button';
+import Spinner from '../layout/Spinner';
+import { URLS } from '../../modules/app';
+import { setLogin, getLogin, setUser, reset } from '../../modules/user';
+import { requestUser } from '../../modules/api';
 
 export const SearchPage = () => {
     const navigate = useNavigate();
@@ -27,20 +27,22 @@ export const SearchPage = () => {
 
     const onSubmit = () => {
         const sanitizedInput = login.trim();
-        const onBefore = () => {
-            dispatch(reset());
-            setLoading(true);
-        }
-        const onSuccess = user => {
-            dispatch(setUser(user));
-            navigate(URLS.profile);
-        };
+        dispatch(reset());
+        setLoading(true);
         requestUser({
-            username: sanitizedInput,
-            onBefore,
-            onSuccess,
-            onCleanup: () => setLoading(false)
-        });
+            username: sanitizedInput
+        })
+        .then(response => {
+            if (response.status === 200) {
+                dispatch(setUser(response.data));
+                navigate(URLS.repositories);
+            }
+        })
+        .catch(e => {
+            if (e.response?.status) alert('Пользователь с таким логином не найден');
+            else alert(e)
+        })
+        .finally(() => setLoading(false))
     };
 
     return (
@@ -59,7 +61,7 @@ export const SearchPage = () => {
                 onClick={onSubmit}
                 text='Перейти к профайлу'
             />
-            { loading && <Loader className='!absolute bottom-2/3 right-1/2'/> }
+            { loading && <Spinner className='!absolute bottom-2/3 right-1/2'/> }
         </div>
     );
 };
