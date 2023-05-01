@@ -1,5 +1,4 @@
 import React from "react";
-import { request } from "../../modules/api";
 import { setData, getData, reset } from "../../modules/commit";
 import { useGrid } from "./hooks";
 import Grid from './Grid';
@@ -16,12 +15,13 @@ const CommitsGrid = ({ repositoryUrl }) => {
         },
     ];
 
-    const [rowData, loading] = useGrid(
-        () => request({ url: `${repositoryUrl}/commits` }),
-        getData,
-        setData,
-        true,
-        reset);
+    const [rowData, loading] = useGrid({
+        url: `${repositoryUrl}/commits`,
+        getDataSelector: getData,
+        setDataAction: setData,
+        shouldResetOnUnmount: true,
+        resetAction: reset
+    });
 
     return (
         <Grid

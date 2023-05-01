@@ -1,13 +1,8 @@
 import { Octokit } from "@octokit/core";
 
-let api = null;
+const getApi = ({ signal }) => new Octokit({ auth: API_TOKEN, request: { signal: signal }});
 
-const getApi = () => {
-    if (!api) api = new Octokit({ auth: API_TOKEN });
-    return api;
-};
-
-export const request = (params) => getApi().request({
+export const request = (params) => getApi({ signal: params.signal }).request({
     headers: {
         'Accept': 'application/vnd.github+json'
     },

@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { request } from "../../modules/api";
 import { setData, setSelectedRepository, getData } from "../../modules/repository";
 import { useGrid } from "./hooks";
 import { URLS } from "../../modules/app";
@@ -18,7 +17,11 @@ const RepositoriesGrid = ({ repositoryUrl }) => {
         { field: 'stargazers_count', headerName: 'Количество звёзд' }
     ];
 
-    const [rowData, loading] = useGrid(() => request({ url: repositoryUrl }), getData, setData);
+    const [rowData, loading] = useGrid({
+        url: repositoryUrl,
+        getDataSelector: getData,
+        setDataAction: setData
+    });
 
     return (
         <Grid
