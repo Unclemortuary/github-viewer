@@ -29,11 +29,11 @@ export const ProfilePage = () => {
             setLoading(false);
             return;
         }
-        
+
         const onSuccess = data => {
             dispatch(setData(data));
         };
-        const onCleanup = () => dispatch(setLoading(false));
+        const onCleanup = () => setLoading(false);
         requestRepositories({ url: reposUrl, onSuccess, onCleanup });
     };
 

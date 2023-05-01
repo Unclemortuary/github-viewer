@@ -31,7 +31,6 @@ export const SearchPage = () => {
             setLoading(true);
         }
         const onSuccess = user => {
-            console.log(user);
             dispatch(setUser(user));
             navigate(URLS.profile);
         };
