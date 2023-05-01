@@ -33,3 +33,31 @@ export const requestUser = ({ username, onBefore, onSuccess, onError, onCleanup 
     onError,
     onCleanup
 });
+
+export const requestRepositories = ({ url, onBefore, onSuccess, onError, onCleanup }) => request({
+    params: {
+        method: 'GET',
+        url,
+        headers: {
+            'Accept': 'application/vnd.github+json'
+        }
+    },
+    onBefore,
+    onSuccess,
+    onError,
+    onCleanup
+});
+
+export const requestCommits = ({ url, onBefore, onSuccess, onError, onCleanup }) => request({
+    params: {
+        method: 'GET',
+        url,
+        headers: {
+            'Accept': 'application/vnd.github+json'
+        }
+    },
+    onBefore,
+    onSuccess,
+    onError,
+    onCleanup
+});

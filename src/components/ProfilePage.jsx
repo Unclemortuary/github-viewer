@@ -1,25 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import BasePage from './BasePage';
 import LoginSection from './LoginSection';
 import AvatarSection from './ImageSection';
 import Grid from './grid/Grid';
 import { URLS } from '../modules/app';
+import { getReposUrl } from '../modules/user';
+import { setData, setSelectedRepository, getData } from '../modules/repository';
+import { requestRepositories } from '../modules/api';
 
 export const ProfilePage = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const reposUrl = useSelector(getReposUrl);
+    const rowData = useSelector(getData);
+    const [loading, setLoading] = useState(true);
 
-    const [rowData, setRowData] = useState([
-        { make: "Toyota", model: "Celica", price: 35000, stars: 4 },
-        { make: "Ford", model: "Mondeo", price: 32000, stars: 1 },
-        { make: "Porsche", model: "Boxster", price: 72000, stars: 0 }
-    ]);
     const [columnDefs, setColumnDefs] = useState([
-        { field: 'make', headerName: 'Наименование' },
-        { field: 'model', headerName: 'Язык программирования' },
-        { field: 'price', headerName: 'Описание' },
-        { field: 'stars', headerName: 'Количество звёзд' }
+        { field: 'name', headerName: 'Наименование' },
+        { field: 'language', headerName: 'Язык программирования' },
+        { field: 'description', headerName: 'Описание', tooltipValueGetter: e => e.data.description },
+        { field: 'stargazers_count', headerName: 'Количество звёзд' }
     ]);
+
+    const fetchGridData = () => {
+        if (rowData.length) {
+            setLoading(false);
+            return;
+        }
+        
+        const onSuccess = data => {
+            dispatch(setData(data));
+        };
+        const onCleanup = () => dispatch(setLoading(false));
+        requestRepositories({ url: reposUrl, onSuccess, onCleanup });
+    };
+
+    useEffect(() => {
+        // const abortController = new AbortController();
+        if (!reposUrl) {
+            navigate('/');
+            return;
+        }
+        fetchGridData();
+    }, []);
 
     const header = (
         <>
@@ -36,10 +61,16 @@ export const ProfilePage = () => {
     const grid = (
         <Grid
             columnDefs={columnDefs}
-            rowData={rowData}
-            onCellClicked={() => navigate(`/${URLS.repository}`)}
+            rowData={loading ? null : rowData}
+            onCellClicked={e => {
+                dispatch(setSelectedRepository({
+                    url: e.data.url,
+                    name: e.data.name
+                }));
+                navigate(`/${URLS.repository}`);
+            }}
         />
     );
 
-    return <BasePage header={header} grid={grid}/>
+    return <BasePage header={header} grid={grid}/>;
 };
