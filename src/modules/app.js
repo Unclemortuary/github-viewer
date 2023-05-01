@@ -9,8 +9,7 @@ export const store = configureStore({
         repository: repositoryReducer,
         commit: commitReducer
     },
-    // todo: dev mode only
-    devTools: true
+    devTools: process.env.NODE_ENV === 'development'
 });
 
 export const URLS = {
