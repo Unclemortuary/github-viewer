@@ -10,11 +10,12 @@ const repositorySlice = createSlice({
     initialState,
     reducers: {
         setData: (state, action) => ({ ...state, data: [...state.data, ...action.payload] }),
-        setSelectedRepository: (state, action) => ({ ...state, selected: action.payload })
+        setSelectedRepository: (state, action) => ({ ...state, selected: action.payload }),
+        reset: state => initialState
     }
 });
 
-export const { setData, setSelectedRepository } = repositorySlice.actions;
+export const { setData, setSelectedRepository, reset } = repositorySlice.actions;
 
 // selectors:
 export const getData = state => state.repository.data;

@@ -19,7 +19,6 @@ const CommitsGrid = ({ repositoryUrl }) => {
         url: `${repositoryUrl}/commits`,
         getDataSelector: getData,
         setDataAction: setData,
-        shouldResetOnUnmount: true,
         resetAction: reset
     });
 

@@ -6,7 +6,6 @@ export const useGrid = ({
     url,
     getDataSelector,
     setDataAction,
-    shouldResetOnUnmount,
     resetAction
 }) => {
     const rowData = useSelector(getDataSelector);
@@ -15,12 +14,8 @@ export const useGrid = ({
     const PAGE_SIZE = 50;
 
     useEffect(() => {
-        if (!shouldResetOnUnmount && rowData?.length) {
-            setLoading(false);
-            return;
-        }
+        dispatch(resetAction());
         const abortController = new AbortController();
-
         async function iterateData() {
             setLoading(true);
             const iterator = getIterator({ url, signal: abortController.signal, pageSize: PAGE_SIZE });
@@ -38,7 +33,6 @@ export const useGrid = ({
         iterateData();
         return () => {
             abortController.abort();
-            if (shouldResetOnUnmount) dispatch(resetAction());
         }
     }, []);
 

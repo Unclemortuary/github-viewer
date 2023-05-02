@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setData, setSelectedRepository, getData } from "../../modules/repository";
+import { setData, setSelectedRepository, getData, reset } from "../../modules/repository";
 import { useGrid } from "./hooks";
 import { URLS } from "../../modules/app";
 import Grid from './Grid';
@@ -20,7 +20,8 @@ const RepositoriesGrid = ({ repositoryUrl }) => {
     const [rowData, loading] = useGrid({
         url: repositoryUrl,
         getDataSelector: getData,
-        setDataAction: setData
+        setDataAction: setData,
+        resetAction: reset
     });
 
     return (
