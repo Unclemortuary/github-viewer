@@ -24,6 +24,7 @@ const Grid = ({ rowData, colDefs, loading, ...props }) => {
                 onGridReady={() => gridRef.current.api.sizeColumnsToFit()}
                 rowData={loading ? null : rowData}
                 columnDefs={colDefs}
+                suppressHorizontalScroll={true}
                 {...props}
             />
         </div>
