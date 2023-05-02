@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from './button/Button';
-import { URLS } from '../modules/app';
-import { setLogin, getLogin, setUser, reset } from '../modules/user';
-import { requestUser } from '../modules/api';
+import Button from '../button/Button';
+import Spinner from '../layout/Spinner';
+import { URLS } from '../../modules/app';
+import { setLogin, getLogin, setUser, reset } from '../../modules/user';
+import { requestUser } from '../../modules/api';
 
 export const SearchPage = () => {
     const navigate = useNavigate();
@@ -26,25 +27,26 @@ export const SearchPage = () => {
 
     const onSubmit = () => {
         const sanitizedInput = login.trim();
-        const onBefore = () => {
-            dispatch(reset());
-            setLoading(true);
-        }
-        const onSuccess = user => {
-            console.log(user);
-            dispatch(setUser(user));
-            navigate(URLS.profile);
-        };
+        dispatch(reset());
+        setLoading(true);
         requestUser({
-            username: sanitizedInput,
-            onBefore,
-            onSuccess,
-            onCleanup: () => setLoading(false)
-        });
+            username: sanitizedInput
+        })
+        .then(response => {
+            if (response.status === 200) {
+                dispatch(setUser(response.data));
+                navigate(URLS.repositories);
+            }
+        })
+        .catch(e => {
+            if (e.response?.status) alert('Пользователь с таким логином не найден');
+            else alert(e)
+        })
+        .finally(() => setLoading(false))
     };
 
     return (
-        <div className='flex self-center my-auto relative'>
+        <div className='flex self-center my-auto'>
             <input
                 className='w-96 h-12 rounded-md px-4 shadow-lg outline-none transition-all focus:outline-yellow-300 outline-2'
                 type='text'
@@ -59,8 +61,7 @@ export const SearchPage = () => {
                 onClick={onSubmit}
                 text='Перейти к профайлу'
             />
-            {/* spinner overlay */}
-            { loading && <p className=' absolute w-8 h-6 left-1/3 -top-32 inset-1 text-white font-light text-lg'>Ищем</p> } 
+            { loading && <Spinner className='!absolute bottom-2/3 right-1/2'/> }
         </div>
     );
 };

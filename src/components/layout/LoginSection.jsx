@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getLogin, getName } from '../modules/user';
+import { getLogin, getName } from '../../modules/user';
 
 const LoginSection = ({ containerClassName }) => {
     const login = useSelector(getLogin);

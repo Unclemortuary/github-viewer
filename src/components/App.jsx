@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { store, URLS } from '../modules/app';
 import { Provider } from 'react-redux';
-import { SearchPage } from './SearchPage';
-import { ProfilePage } from './ProfilePage';
-import { RepositoryPage } from './RepositoryPage';
+import { SearchPage } from './pages/SearchPage';
+import { RepositoriesPage } from './pages/RepositoriesPage';
+import { CommitsPage } from './pages/CommitsPage'
 
 const router = createHashRouter([
     {
@@ -12,12 +12,12 @@ const router = createHashRouter([
       element: <SearchPage />,
     },
     {
-        path: `/${URLS.profile}`,
-        element: <ProfilePage />,
+        path: `/${URLS.repositories}`,
+        element: <RepositoriesPage />,
     },
     {
-        path: `/${URLS.repository}`,
-        element: <RepositoryPage />,
+        path: `/${URLS.commits}`,
+        element: <CommitsPage />,
     }
 ]);
 

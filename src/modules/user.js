@@ -1,6 +1,4 @@
-import { createAction, createSlice } from '@reduxjs/toolkit';
-
-export const initApp = createAction('app/initApp');
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     avatar_url: '',
@@ -26,5 +24,6 @@ export const { setAvatarUrl, setLogin, setName, setUser, reset } = userSlice.act
 export const getAvatarUrl = state => state.user.avatar_url;
 export const getLogin = state => state.user.login;
 export const getName = state => state.user.name;
+export const getReposUrl = state => state.user.repos_url;
 
 export default userSlice.reducer;

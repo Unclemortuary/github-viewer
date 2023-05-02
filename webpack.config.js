@@ -29,7 +29,7 @@ module.exports = function(env, argv) {
             directory: path.resolve(__dirname, 'dist')
         },
     },
-    devtool: 'eval-source-map',
+    devtool: argv.mode === 'development' ? 'eval-source-map' : false,
     module: {
       rules: [
         {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getAvatarUrl } from '../modules/user';
+import { getAvatarUrl } from '../../modules/user';
 
 const AvatarSection = ({ containerClassName }) => {
     const src = useSelector(getAvatarUrl);

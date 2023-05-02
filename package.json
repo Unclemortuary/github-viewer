@@ -6,7 +6,6 @@
   "scripts": {
     "build-prod": "webpack --mode production",
     "build": "webpack --mode development",
-    "watch": "webpack --mode development --watch",
     "serve": "webpack serve --mode development --open --live-reload --no-hot"
   },
   "repository": {
@@ -20,14 +19,15 @@
   },
   "homepage": "https://github.com/Unclemortuary/github-viewer#readme",
   "dependencies": {
-    "@octokit/core": "4.2.0",
     "@reduxjs/toolkit": "1.9.5",
-    "ag-grid-community": "29.3.2",
-    "ag-grid-react": "29.3.2",
+    "ag-grid-community": "29.3.3",
+    "ag-grid-react": "29.3.3",
+    "octokit": "2.0.14",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "8.0.5",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "6.10.0",
+    "react-spinners": "0.13.8"
   },
   "devDependencies": {
     "@babel/core": "7.21.4",

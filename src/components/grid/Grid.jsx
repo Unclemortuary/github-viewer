@@ -5,7 +5,7 @@ import 'ag-grid-community/styles/ag-grid';
 import 'ag-grid-community/styles/ag-theme-material';
 import './ag-grid-overrides.scss';
 
-const Grid = props => {
+const Grid = ({ rowData, colDefs, loading, ...props }) => {
     const gridRef = useRef();
 
     useEffect(() => {
@@ -21,9 +21,10 @@ const Grid = props => {
             <AgGridReact
                 ref={gridRef}
                 sizeCol
-                onGridReady={() => {
-                    gridRef.current.api.sizeColumnsToFit();
-                }}
+                onGridReady={() => gridRef.current.api.sizeColumnsToFit()}
+                rowData={loading ? null : rowData}
+                columnDefs={colDefs}
+                suppressHorizontalScroll={true}
                 {...props}
             />
         </div>
