@@ -10,3 +10,6 @@ dist/
 build/
 node_modules/
 coverage/
+
+# Claude
+claude.md
